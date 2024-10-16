@@ -150,8 +150,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white text-black">
-      <HeroSection />
       <Header />
+      <HeroSection />
       <Banner />
       <div className="max-w-7xl mx-auto py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8 text-center">Newest Products</h2>
