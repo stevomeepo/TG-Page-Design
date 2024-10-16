@@ -6,9 +6,9 @@ import { FaSearch, FaShoppingCart } from 'react-icons/fa';
 const Header = () => {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+      <div className="max-w-8xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0 -ml-4 sm:-ml-8 md:-ml-12 lg:-ml-16 xl:-ml-20">
+          <div className="flex-shrink-0">
             <Image
               src="/TG-main.png"
               alt="Top Greener Logo"

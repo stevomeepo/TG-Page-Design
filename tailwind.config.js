@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'mint-green': '#D4F0C5', // A softer, more pastel mint green
       },
     },
   },

@@ -4,13 +4,16 @@ import { FaLightbulb, FaPlug, FaRecycle, FaChevronLeft, FaChevronRight } from 'r
 import { MdSensors } from 'react-icons/md';
 import ProductCard from '@/components/ProductCard';
 import WallOutletIcon from '@/components/WallOutletIcon';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Banner from '@/components/Banner';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import DiscountProductCard from '@/components/DiscountProductCard';
 import LightSwitchIcon from '@/components/LightSwitchIcon';
 import UsbOutletIcon from '@/components/UsbOutletIcon';
+import Hero2 from '@/components/Hero2';
+import Newsletter from '@/components/Newsletter';
+import Footer from '@/components/Footer';
 
 const iconProducts = [
   { name: 'Smart Switch', icon: LightSwitchIcon },
@@ -129,7 +132,15 @@ export default function Home() {
 
   // Add these for DiscountProductCard pagination
   const [currentDiscountIndex, setCurrentDiscountIndex] = useState(0);
-  const discountProductsPerPage = 4;
+  const [translateX, setTranslateX] = useState(0);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const cardWidth = containerRef.current.offsetWidth / 4; // Assuming 4 cards are visible
+      setTranslateX(-currentDiscountIndex * cardWidth);
+    }
+  }, [currentDiscountIndex]);
 
   const nextDiscountPage = () => {
     setCurrentDiscountIndex((prev) => (prev + 1) % discountedProducts.length);
@@ -139,20 +150,12 @@ export default function Home() {
     setCurrentDiscountIndex((prev) => (prev - 1 + discountedProducts.length) % discountedProducts.length);
   };
 
-  const getVisibleDiscountProducts = () => {
-    const products = [];
-    for (let i = 0; i < discountProductsPerPage; i++) {
-      const index = (currentDiscountIndex + i) % discountedProducts.length;
-      products.push(discountedProducts[index]);
-    }
-    return products;
-  };
-
   return (
     <main className="min-h-screen bg-white text-black">
       <Header />
       <HeroSection />
-      <Banner />
+      
+
       <div className="max-w-7xl mx-auto py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8 text-center">Newest Products</h2>
         <div className="relative">
@@ -183,6 +186,14 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Banner section with 8xl width */}
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-24">
+        <Banner />
+      </div>
+
+      <div className="max-w-7xl mx-auto py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
         <div className="mt-16 sm:mt-24">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8 text-center">Special Offers</h2>
           <div className="relative px-4 sm:px-12">
@@ -200,10 +211,13 @@ export default function Home() {
                 <FaChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
               </button>
             </div>
-            <div className="overflow-hidden">
-              <div className="flex flex-wrap sm:flex-nowrap">
-                {getVisibleDiscountProducts().map((product, index) => (
-                  <div key={index} className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4 sm:mb-0 flex-shrink-0">
+            <div className="overflow-hidden" ref={containerRef}>
+              <div 
+                className="flex transition-transform duration-300 ease-in-out"
+                style={{ transform: `translateX(${translateX}px)` }}
+              >
+                {[...discountedProducts, ...discountedProducts.slice(0, 3)].map((product, index) => (
+                  <div key={index} className="w-full sm:w-1/2 lg:w-1/4 flex-shrink-0 px-2">
                     <DiscountProductCard
                       name={product.name}
                       description={product.description}
@@ -218,28 +232,39 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="mt-16 sm:mt-20">
-          <h1 className="text-center text-3xl sm:text-5xl font-bold mb-4">
-            Upgrade. Save. Sustain.
-          </h1>
-          <p className="text-center text-lg sm:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
-            With Top Greener, you can upgrade your home with energy-efficient solutions and save money. 
-            Our products help reduce your energy consumption and lower your bills. 
-            It's a great deal for you, your wallet, and the planet.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-8 mb-8 sm:mb-12 px-4">
-            {iconProducts.map((product, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl sm:text-4xl mb-2 flex justify-center">
-                  <product.icon className="w-8 h-8 sm:w-12 sm:h-12" />
-                </div>
-                <div className="text-xs sm:text-sm">{product.name}</div>
+      {/* Hero2 section */}
+      <Hero2 />
+
+      <div className="mt-16 sm:mt-16">
+        <h1 className="text-center text-3xl sm:text-5xl font-bold mb-4">
+          Upgrade. Save. Sustain.
+        </h1>
+        <p className="text-center text-lg sm:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
+          With Top Greener, you can upgrade your home with energy-efficient solutions and save money. 
+          Our products help reduce your energy consumption and lower your bills. 
+          It's a great deal for you, your wallet, and the planet.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-8 mb-8 sm:mb-12 px-4 max-w-7xl mx-auto">
+          {iconProducts.map((product, index) => (
+            <div key={index} className="text-center">
+              <div className="text-3xl sm:text-4xl mb-2 flex justify-center">
+                <product.icon className="w-8 h-8 sm:w-12 sm:h-12" />
               </div>
-            ))}
-          </div>
+              <div className="text-xs sm:text-sm">{product.name}</div>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Newsletter section */}
+      <div className="-mt-8 sm:-mt-12">
+        <Newsletter />
+      </div>
+
+      {/* Footer */}
+      <Footer />
     </main>
   );
 }

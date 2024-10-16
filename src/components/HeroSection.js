@@ -20,7 +20,7 @@ export default function HeroSection() {
               {/* Decorative image grid */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2"
+                className="pointer-events-none lg:absolute lg:inset-y-0 lg:left-1/3 lg:w-1/2"
               >
                 <div className="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-full">
                   <div className="absolute inset-0 flex items-center justify-center lg:justify-end">
@@ -87,13 +87,13 @@ export default function HeroSection() {
 
               <a
                 href="#"
-                className="inline-block rounded-full bg-blue-600 px-6 sm:px-8 py-2 sm:py-3 text-center text-base sm:text-lg font-medium text-white hover:bg-blue-700 transition-colors duration-300 ease-in-out"
+                className="inline-block rounded-full bg-blue-500 px-6 sm:px-8 py-2 sm:py-3 text-center text-base sm:text-lg font-medium text-white hover:bg-blue-600 transition-colors duration-300 ease-in-out"
               >
                 Shop Smart Solutions
               </a>
               <a
                 href="#"
-                className="inline-block ml-4 text-base sm:text-lg font-medium text-blue-600 hover:underline"
+                className="inline-block ml-4 text-base sm:text-lg font-medium text-blue-500 hover:underline"
               >
                 Learn more &gt;
               </a>
