@@ -1,7 +1,7 @@
 "use client";
 
 import { FaLightbulb, FaPlug, FaRecycle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { MdUsb, MdSensors } from 'react-icons/md';
+import { MdSensors } from 'react-icons/md';
 import ProductCard from '@/components/ProductCard';
 import WallOutletIcon from '@/components/WallOutletIcon';
 import { useState } from 'react';
@@ -9,10 +9,12 @@ import Banner from '@/components/Banner';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import DiscountProductCard from '@/components/DiscountProductCard';
+import LightSwitchIcon from '@/components/LightSwitchIcon';
+import UsbOutletIcon from '@/components/UsbOutletIcon';
 
 const iconProducts = [
-  { name: 'Smart Switch', icon: FaPlug },
-  { name: 'USB Outlet', icon: MdUsb },
+  { name: 'Smart Switch', icon: LightSwitchIcon },
+  { name: 'USB Outlet', icon: UsbOutletIcon },
   { name: 'Motion Sensor', icon: MdSensors },
   { name: 'Dimmer', icon: FaLightbulb },
   { name: 'Wall Plate', icon: WallOutletIcon },
@@ -148,6 +150,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white text-black">
+      <HeroSection />
       <Header />
       <Banner />
       <div className="max-w-7xl mx-auto py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
@@ -180,9 +183,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-
-        <HeroSection />
-
         <div className="mt-16 sm:mt-24">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8 text-center">Special Offers</h2>
           <div className="relative px-4 sm:px-12">
